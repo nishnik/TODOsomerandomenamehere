@@ -1,0 +1,220 @@
+{
+    "GRU": {
+        "optional": [
+            "activation",
+            "recurrent_activation",
+            "use_bias",
+            "kernel_initializer",
+            "recurrent_initializer",
+            "bias_initializer",
+            "kernel_regularizer",
+            "recurrent_regularizer",
+            "bias_regularizer",
+            "activity_regularizer",
+            "kernel_constraint",
+            "bias_constraint",
+            "recurrent_constraint",
+            "dropout",
+            "recurrent_dropout"
+        ],
+        "required": [
+            "units"
+        ]
+    },
+    "Dropout": {
+        "optional": [
+            "noise_shape",
+            "seed",
+            "input_shape"
+        ],
+        "required": [
+            "rate"
+        ]
+    },
+    "Reshape": {
+        "optional": [
+            "input_shape"
+        ],
+        "required": [
+            "target_shape"
+        ]
+    },
+    "ActivityRegularization": {
+        "optional": [
+            "input_shape"
+        ],
+        "required": [
+            "l1",
+            "l2"
+        ]
+    },
+    "MaxPooling2D": {
+        "optional": [
+            "pool_size",
+            "strides",
+            "padding",
+            "data_format",
+            "input_shape"
+        ],
+        "required": []
+    },
+    "Activation": {
+        "optional": [
+            "input_shape"
+        ],
+        "required": [
+            "activation"
+        ]
+    },
+    "MaxPooling1D": {
+        "optional": [
+            "pool_size",
+            "strides",
+            "padding",
+            "input_shape"
+        ],
+        "required": []
+    },
+    "Conv2D": {
+        "optional": [
+            "input_shape",
+            "strides",
+            "padding",
+            "data_format",
+            "dilation_rate",
+            "activation",
+            "use_bias",
+            "kernel_initializer",
+            "bias_initializer",
+            "kernel_regularizer",
+            "bias_regularizer",
+            "activity_regularizer",
+            "kernel_constraint",
+            "bias_constraint"
+        ],
+        "required": [
+            "filters",
+            "kernel_size"
+        ]
+    },
+    "Masking": {
+        "optional": [
+            "input_shape"
+        ],
+        "required": [
+            "mask_value"
+        ]
+    },
+    "Dense": {
+        "optional": [
+            "input_shape",
+            "activation",
+            "use_bias",
+            "kernel_initializer",
+            "bias_initializer",
+            "kernel_regularizer",
+            "bias_regularizer",
+            "activity_regularizer",
+            "kernel_constraint",
+            "bias_constraint"
+        ],
+        "required": [
+            "units"
+        ]
+    },
+    "Permute": {
+        "optional": [
+            "input_shape"
+        ],
+        "required": [
+            "dims"
+        ]
+    },
+    "RepeatVector": {
+        "optional": [],
+        "required": [
+            "n"
+        ]
+    },
+    "SimpleRNN": {
+        "optional": [
+            "activation",
+            "use_bias",
+            "kernel_initializer",
+            "recurrent_initializer",
+            "bias_initializer",
+            "kernel_regularizer",
+            "recurrent_regularizer",
+            "bias_regularizer",
+            "activity_regularizer",
+            "kernel_constraint",
+            "bias_constraint",
+            "recurrent_constraint",
+            "dropout",
+            "recurrent_dropout"
+        ],
+        "required": [
+            "units"
+        ]
+    },
+    "Flatten": {
+        "optional": [
+            "input_shape"
+        ],
+        "required": []
+    },
+    "Conv1D": {
+        "optional": [
+            "input_shape",
+            "strides",
+            "padding",
+            "dilation_rate",
+            "activation",
+            "use_bias",
+            "kernel_initializer",
+            "bias_initializer",
+            "kernel_regularizer",
+            "bias_regularizer",
+            "activity_regularizer",
+            "kernel_constraint",
+            "bias_constraint"
+        ],
+        "required": [
+            "filters",
+            "kernel_size"
+        ]
+    },
+    "LSTM": {
+        "optional": [
+            "activation",
+            "recurrent_activation",
+            "use_bias",
+            "kernel_initializer",
+            "recurrent_initializer",
+            "bias_initializer",
+            "kernel_regularizer",
+            "recurrent_regularizer",
+            "bias_regularizer",
+            "activity_regularizer",
+            "kernel_constraint",
+            "bias_constraint",
+            "recurrent_constraint",
+            "dropout",
+            "recurrent_dropout"
+        ],
+        "required": [
+            "units"
+        ]
+    },
+    "Lambda": {
+        "optional": [
+            "output_shape",
+            "mask",
+            "arguments",
+            "input_shape"
+        ],
+        "required": [
+            "function"
+        ]
+    }
+}
