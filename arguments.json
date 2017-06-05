@@ -1,12 +1,13 @@
 {
     "use_bias": {
+        "type": "bool",
         "values": [
             "True",
             "False"
-        ],
-        "type": "bool"
+        ]
     },
     "activation": {
+        "type": "str",
         "values": [
             "softmax",
             "elu",
@@ -17,8 +18,7 @@
             "sigmoid",
             "hard_sigmoid",
             "linear"
-        ],
-        "type": "str"
+        ]
     },
     "units": {
         "type": "int"

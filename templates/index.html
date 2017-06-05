@@ -13,19 +13,20 @@
 
 
 <div class="btn-group dropup floating-action-button">
-  <button type="button" class="btn-primary btn-floating btn-large red" data-toggle="modal" data-target="#exampleModal" aria-haspopup="true" aria-expanded="false" data-text="+">
+  <button type="button" class="btn-primary btn-floating btn-large red" data-toggle="modal" data-target="#layerModal" aria-haspopup="true" aria-expanded="false" data-text="+">
   </button>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="layerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <h4 class="modal-title" id="exampleModalLabel">Add Layer</h4>
+      <h4 class="modal-title" id="layerModalLabel">Add Layer</h4>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
               <form onsubmit="layerNameSubmit()" class="form-inline" method="post" id="form_layerName">
+              <!-- TODO: Point to input when modal opens up -->
               <input type="text" id="layername" class="form-control" placeholder="Layer Name" name="layername" value=""> <!-- for layer input -->
               <input class="btn btn-primary" value="Submit" type="submit">
               </form>
@@ -49,10 +50,12 @@
         return false;
      });
   });
+
   var input = document.getElementById("layername");
   list_layer = [];
-  var layer = {{ layers|tojson }};
-  layer_keys = Object.keys(layer);
+  var layers_ = {{ layers|tojson }};
+  var arguments_ = {{ arguments|tojson }};
+  layer_keys = Object.keys(layers_);
   new Awesomplete(input, {
     list: layer_keys
   });
@@ -63,27 +66,58 @@
       elem.parentNode.removeChild(elem);
     var x = document.getElementById("layername").value;
     console.log(x);
-    console.log(layer[x]);
+    console.log(layers_[x]);
     var html = '<div id="attributesAdd">';
     html += '<form onsubmit="layerFinalSubmit()" method="post" id="form_layerFinal">';
     html += "<br/>Required:<br/>"
-    for (a in layer[x]['required']) {
-      html += '<input type="text" id="' + layer[x]['required'][a] + '_input" class="form-control" required="true" placeholder="' + layer[x]['required'][a]  +'">'
-      // var tmp = document.getElementById(a+'_input'); // TODO: link it with awesomplete but would require json first
+    for (a in layers_[x]['required']) { // TODO: Change it to function
+      var input_placeholder = layers_[x]['required'][a] + "(";
+      if (layers_[x]['required'][a] in arguments_) { // TODO: After completing JSON remove this
+        input_type = arguments_[layers_[x]['required'][a]]["type"];
+      }
+      input_placeholder += ")";
+      html += '<input type="text" id="' + layers_[x]['required'][a] + '_input" class="form-control" required="true" placeholder="' + input_placeholder +'">'
     }
     html += "<br/>Optional:<br/>"
-    for (a in layer[x]['optional']) {
-      html += '<input type="text" id="' + layer[x]['optional'][a] + '_input" class="form-control" placeholder="'+ layer[x]['optional'][a] + '">'
-      // var tmp = document.getElementById(a+'_input'); // TODO: link it with awesomplete but would require json first
+    
+    for (a in layers_[x]['optional']) {
+      var input_placeholder = layers_[x]['optional'][a] + "(";
+      if (layers_[x]['optional'][a] in arguments_) { // TODO: After completing JSON remove this
+        input_placeholder += arguments_[layers_[x]['optional'][a]]["type"];
+      }
+      input_placeholder += ")";
+      html += '<input type="text" id="' + layers_[x]['optional'][a] + '_input" class="form-control" placeholder="'+ input_placeholder + '">'
     }
-    html += '<input class="btn btn-primary" value="Submit">';
+    
+    html += '<input class="btn btn-primary" value="Submit" type="submit">';
     html += '</div>'
     document.getElementById("attributes").innerHTML = html;
-    return false;
+    
+    for (a in layers_[x]['required']) { // TODO: Change it to function
+      if (layers_[x]['required'][a] in arguments_) { // TODO: After completing JSON remove this
+        if ("values" in arguments_[layers_[x]['required'][a]]) {
+          var input = document.getElementById(layers_[x]['required'][a]+"_input");
+          new Awesomplete(input, {
+            list: arguments_[layers_[x]['required'][a]]["values"]
+          });
+        }
+      }
+    }
+    for (a in layers_[x]['optional']) { // TODO: Change it to function
+      if (layers_[x]['optional'][a] in arguments_) { // TODO: After completing JSON remove this
+        if ("values" in arguments_[layers_[x]['optional'][a]]) {
+          var input = document.getElementById(layers_[x]['optional'][a]+"_input");
+          new Awesomplete(input, {
+            list: arguments_[layers_[x]['optional'][a]]["values"]
+          });
+        }
+      }
+    }
+    
   }
 
   function layerFinalSubmit() {
-
+    a = "";
   }
 
 </script>
